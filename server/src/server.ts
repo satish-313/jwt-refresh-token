@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import "dotenv/config";
+import cors from "cors";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-import cors from "cors";
 import { UserResolver } from "./UserResolver";
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
@@ -13,6 +13,9 @@ import { sendRefreshToken } from "./utils/sendRefreshToken";
 
 const main = async () => {
   const app = express();
+
+  app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
   app.get("/", (_, res) => {
     res.send("hello the world");
   });
@@ -87,7 +90,7 @@ const main = async () => {
   });
 
   await apolloserver.start();
-  apolloserver.applyMiddleware({ app });
+  apolloserver.applyMiddleware({ app , cors: false});
 
   app.listen(4040, () => {
     console.log("server is running on post 4040");
