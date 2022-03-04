@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Bye } from "./pages/Bye";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div>
@@ -18,15 +19,19 @@ const App: React.FC = () => {
           <div>
             <Link to="/login">Login</Link>
           </div>
+          <div>
+            <Link to="/bye">Bye</Link>
+          </div>
         </header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/bye" element={<Bye/>} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 };
 
-export default App;
+

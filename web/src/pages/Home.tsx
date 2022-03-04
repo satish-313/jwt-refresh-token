@@ -4,7 +4,18 @@ import { useUsersQuery } from "../generated/graphql";
 interface Props {}
 
 export const Home: React.FC<Props> = () => {
-  const { data } = useUsersQuery({ fetchPolicy: "network-only" });
+  const { data, error, loading } = useUsersQuery({
+    fetchPolicy: "network-only",
+  });
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (error) {
+    console.log(error)
+    return <div>error</div>;
+  }
 
   if (!data) {
     return <div>loading...</div>;

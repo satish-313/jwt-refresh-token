@@ -23,8 +23,9 @@ const main = async () => {
   app.post("/refresh_token", async (req, res) => {
     let cookie = req.headers.cookie;
     if (!cookie) {
-      return res.json("error");
+      return res.json("error no cookie");
     }
+    // console.log(cookie)
     let cookies: string[] = cookie.split(";");
     let cookieObj = cookies.map((c) => {
       interface makeObj {

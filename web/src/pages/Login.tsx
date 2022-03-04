@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { setAccessToken } from "../accessToken";
 import { useLoginMutation } from "../generated/graphql";
 
 interface Props {}
@@ -21,6 +22,10 @@ export const Login: React.FC<Props> = () => {
           });
 
           console.log(responce);
+          if (responce && responce.data) {
+            setAccessToken(responce.data.login.accessToken) ;
+          }
+
           setEmail("");
           setPassword("");
         }}
